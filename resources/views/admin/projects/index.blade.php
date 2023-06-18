@@ -2,9 +2,15 @@
 
 @section('content')
 <div class="container p-5">
-    <h2 class="fs-4 my-4">
+    <h1 class="fs-4 my-4">
         Project List
-    </h2>
+    </h1>
+
+    @if (session('deleted'))
+        <div class="alert alert-success" role="alert">
+            {{ session('deleted') }}
+        </div>
+    @endif
 
     <table class="table table-dark table-striped table-hover">
         <thead>
@@ -30,6 +36,20 @@
                     <td>{{ date_format($dateOfStart, 'd/m/Y') }}</td>
                     <td>
                         <a href="{{route('admin.projects.show', $project)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                        <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+
+                        <form
+                            class="d-inline"
+                            action="{{route('admin.projects.destroy', $project)}}"
+                            method="POST"
+                            onsubmit="return confirm('Confermi l\'eliminazione del prodotto:  {{ $project->name }} ?')"
+                        >
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+
+                        </form>
+
                     </td>
                 </tr>
             @endforeach

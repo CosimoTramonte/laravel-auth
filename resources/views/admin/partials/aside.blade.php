@@ -2,7 +2,7 @@
 <aside>
     <nav>
         <ul>
-            <a href="#">
+            <a href="{{ route('admin.home') }}">
                 <li>
                     <i class="fa-solid fa-chart-line"></i>
                     <span>Dashboard</span>
@@ -14,7 +14,7 @@
                     <span>Projects</span>
                 </li>
             </a>
-            <a href="#">
+            <a href="{{route('admin.projects.create')}}">
                 <li>
                     <i class="fa-solid fa-square-plus"></i>
                     <span>New Projects</span>
