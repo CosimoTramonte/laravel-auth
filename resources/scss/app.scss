@@ -91,3 +91,23 @@ aside{
 .main-wrapper{
     height: calc(100vh - 80px);
 }
+
+main{
+    background-color: #26273D !important;
+    box-shadow: inset 5px 5px 9px -5px  black;
+
+    h2,
+    h1,
+    h3,
+    h4,
+    h5,
+    h6{
+        color: #8e91ab !important;
+    }
+
+    p,
+    span{
+        color: white;
+    }
+}
+

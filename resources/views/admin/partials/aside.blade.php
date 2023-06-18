@@ -8,7 +8,7 @@
                     <span>Dashboard</span>
                 </li>
             </a>
-            <a href="#">
+            <a href="{{route('admin.projects.index')}}">
                 <li>
                     <i class="fa-solid fa-list"></i>
                     <span>Projects</span>
