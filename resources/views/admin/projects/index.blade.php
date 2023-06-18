@@ -36,7 +36,7 @@
                     <td>{{ date_format($dateOfStart, 'd/m/Y') }}</td>
                     <td>
                         <a href="{{route('admin.projects.show', $project)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                        <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
 
                         <form
                             class="d-inline"
