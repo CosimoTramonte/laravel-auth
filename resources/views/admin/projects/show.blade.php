@@ -8,9 +8,9 @@
 
     <div class="w-100">
         @if ($project->image_path)
-        <img class="w-50" src="{{ asset('storage/' . $project->image_path) }}" alt="{{$project->name}}">
+            <img class="w-50" src="{{ asset('storage/' . $project->image_path) }}" alt="{{$project->name}}">
         @else
-        <img class="w-50" src="/img/no-img.jpg" alt="{{$project->name}}">
+            <img class="w-50" src="/img/no-img.jpg" alt="{{$project->name}}">
         @endif
     </div>
 

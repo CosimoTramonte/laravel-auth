@@ -38,17 +38,7 @@
                         <a href="{{route('admin.projects.show', $project)}}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
                         <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
 
-                        <form
-                            class="d-inline"
-                            action="{{route('admin.projects.destroy', $project)}}"
-                            method="POST"
-                            onsubmit="return confirm('Confermi l\'eliminazione del prodotto:  {{ $project->name }} ?')"
-                        >
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-
-                        </form>
+                        @include('admin.partials.delete_modal')
 
                     </td>
                 </tr>
