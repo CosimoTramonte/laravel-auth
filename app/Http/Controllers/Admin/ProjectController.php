@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -41,6 +42,14 @@ class ProjectController extends Controller
         $form_data = $request->all();
         $form_data['slug'] = Project::generateSlug($form_data['name']);
         $form_data['project_start'] = date('Y-m-d');
+
+        if(array_key_exists('image', $form_data)){
+            //salvo nome originale
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            //salvo percorso img
+            //con putFileas al posto di put e passando il nome dell'immagine, tengo invariato il nome dell'immagine e non uno casuale generato da Laravel
+            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+        }
 
         $new_project = new Project();
         $new_project->fill($form_data);
@@ -85,12 +94,26 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
+
         $form_data = $request->all();
 
         if($project->name !== $form_data['name']){
             $form_data['slug']  = Project::generateSlug($form_data['name']);
         }else{
             $form_data['slug']  = $project->slug;
+        }
+
+        if(array_key_exists('image', $form_data)){
+
+            //la elimino dallo storage
+            if($project->image_path){
+                Storage::disk('public')->delete($project->image_path);
+            }
+            //salvo nome originale
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            //salvo percorso img
+            //con putFileas al posto di put e passando il nome dell'immagine, tengo invariato il nome dell'immagine e non uno casuale generato da Laravel
+            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
         }
 
         $project->update($form_data);
@@ -106,6 +129,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        //la elimino dallo storage
+        if($project->image_path){
+            Storage::disk('public')->delete($project->image_path);
+        }
+
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('deleted', "The project $project->name was successfully deleted");

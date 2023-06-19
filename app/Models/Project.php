@@ -14,6 +14,8 @@ class Project extends Model
         'name',
         'slug',
         'type',
+        'image_original_name',
+        'image_path',
         'description',
         'technologies_used',
         'project_start',

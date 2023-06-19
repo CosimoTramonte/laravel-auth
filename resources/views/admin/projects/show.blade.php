@@ -6,6 +6,14 @@
         {{$project->name}}
     </h1>
 
+    <div class="w-100">
+        @if ($project->image_path)
+        <img class="w-50" src="{{ asset('storage/' . $project->image_path) }}" alt="{{$project->name}}">
+        @else
+        <img class="w-50" src="/img/no-img.jpg" alt="{{$project->name}}">
+        @endif
+    </div>
+
     <div>
         <h3 class="py-4">Type -> {{$project->type}}</h3>
         <h4 class="py-2">Technologies used -> {{$project->technologies_used}}</h4>

@@ -18,7 +18,7 @@
 
     @endif
 
-    <form action="{{route('admin.projects.store')}}" method="POST">
+    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -43,6 +43,18 @@
                 value="{{ old('type')}}"
                 placeholder="Type"
             >
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label text-white">Select an Image</label>
+            <input
+                class="form-control"
+                onchange="showImg(event)"
+                type="file"
+                id="image"
+                name="image"
+            >
+            <img class="py-3" src="" id="img-show" alt="" width="200">
         </div>
 
         <div class="mb-3">
@@ -105,7 +117,12 @@
         .create( document.querySelector( '#description' ) )
         .catch( error => {
             console.error( error );
-        } );
+    } );
+
+    function showImg(event){
+        const tagImg = document.getElementById('img-show');
+        tagImg.src = URL.createObjectURL(event.target.files[0]);
+    }
 </script>
 
 @endsection

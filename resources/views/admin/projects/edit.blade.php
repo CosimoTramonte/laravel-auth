@@ -18,8 +18,10 @@
 
     @endif
 
-    <form action="{{route('admin.projects.store', $project)}}" method="POST">
+
+    <form action="{{route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         <div class="mb-3">
             <label for="name" class="form-label text-white">Name of Project</label>
@@ -43,6 +45,17 @@
                 value="{{ old('type', $project->type)}}"
                 placeholder="Type"
             >
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label text-white">Select an Image</label>
+            <input
+                class="form-control"
+                onchange="showImg(event)"
+                type="file"
+                id="image"
+                name="image">
+            <img class="py-3" src="{{ asset('storage/' . $project->image_path) }}" id="img-show" alt="" width="200">
         </div>
 
         <div class="mb-3">
@@ -117,7 +130,12 @@
         .create( document.querySelector( '#description' ) )
         .catch( error => {
             console.error( error );
-        } );
+    } );
+
+    function showImg(event){
+        const tagImg = document.getElementById('img-show');
+        tagImg.src = URL.createObjectURL(event.target.files[0]);
+    }
 </script>
 
 @endsection
